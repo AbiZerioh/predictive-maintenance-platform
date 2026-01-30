@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏭 Plateforme de Maintenance Prédictive</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .hero-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .status-normal {
+            background-color: rgba(39, 174, 96, 0.1);
+            color: var(--success-color);
+        }
+        
+        .status-warning {
+            background-color: rgba(243, 156, 18, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .status-critical {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--danger-color);
+        }
+        
+        .api-endpoint {
+            background: #f8f9fa;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0 5px 5px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .btn-custom {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-industry me-2"></i>
+                <strong>Maintenance Prédictive</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <i class="fas fa-home me-1"></i>Accueil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/docs" target="_blank">
+                            <i class="fas fa-book me-1"></i>API Docs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8501" target="_blank">
+                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="hero-section">
+                    <!-- En-tête -->
+                    <div class="text-center mb-5">
+                        <h1 class="display-4 fw-bold text-dark mb-3">
+                            <i class="fas fa-robot text-primary"></i>
+                            Plateforme de Maintenance Prédictive
+                        </h1>
+                        <p class="lead text-muted mb-4">
+                            Intelligence artificielle et Machine Learning pour la prédiction de pannes industrielles
+                        </p>
+                        
+                        <!-- Badges de statut -->
+                        <div class="mb-4">
+                            <span class="status-badge status-normal me-2">
+                                <i class="fas fa-check-circle me-1"></i>API Active
+                            </span>
+                            <span class="status-badge status-normal me-2">
+                                <i class="fas fa-brain me-1"></i>Modèles Chargés
+                            </span>
+                            <span class="status-badge status-normal">
+                                <i class="fas fa-bolt me-1"></i>Temps Réel
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Statistiques en temps réel -->
+                    <div class="row mb-5">
+                        <div class="col-md-3 col-6">
+                            <div class="text-center">
+                                <div class="feature-icon">
+                                    <i class="fas fa-microchip"></i>
+                                </div>
+                                <h3 class="h4 mb-2" id="active-equipment">24</h3>
+                                <p class="text-muted mb-0">Équipements actifs</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="text-center">
+                                <div class="feature-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h3 class="h4 mb-2" id="predictions-count">1,500</h3>
+                                <p class="text-muted mb-0">Prédictions réalisées</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="text-center">
+                                <div class="feature-icon">
+                                    <i class="fas fa-bell"></i>
+                                </div>
+                                <h3 class="h4 mb-2" id="active-alerts">3</h3>
+                                <p class="text-muted mb-0">Alertes actives</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="text-center">
+                                <div class="feature-icon">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <h3 class="h4 mb-2" id="models-loaded">4</h3>
+                                <p class="text-muted mb-0">Modèles ML</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fonctionnalités -->
+                    <div class="row mb-5">
+                        <div class="col-md-6">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <h4 class="h5 mb-3">Modèles de Machine Learning</h4>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        LSTM pour séries temporelles
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        XGBoost pour haute performance
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Random Forest pour robustesse
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Modèles ensemble combinés
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <h4 class="h5 mb-3">Traitement Temps Réel</h4>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Streaming WebSocket
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Simulation de capteurs
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Alertes instantanées
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        Dashboard interactif
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documentation API -->
+                    <div class="mb-5">
+                        <h3 class="h4 mb-3">
+                            <i class="fas fa-code text-primary me-2"></i>
+                            API Endpoints
+                        </h3>
+                        
+                        <div class="api-endpoint">
+                            <span class="badge bg-success me-2">POST</span>
+                            <strong>/predict</strong> - Prédiction de RUL
+                            <p class="mb-0 text-muted small">
+                                {"equipment_id": "string", "features": [float], "model_type": "string"}
+                            </p>
+                        </div>
+                        
+                        <div class="api-endpoint">
+                            <span class="badge bg-primary me-2">GET</span>
+                            <strong>/health</strong> - État du système
+                        </div>
+                        
+                        <div class="api-endpoint">
+                            <span class="badge bg-primary me-2">GET</span>
+                            <strong>/models</strong> - Modèles disponibles
+                        </div>
+                        
+                        <div class="api-endpoint">
+                            <span class="badge bg-primary me-2">GET</span>
+                            <strong>/monitor/alerts</strong> - Alertes système
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="text-center mt-5">
+                        <h4 class="mb-4">Actions rapides</h4>
+                        <div class="d-flex flex-wrap justify-content-center gap-3">
+                            <a href="/docs" target="_blank" class="btn btn-custom">
+                                <i class="fas fa-book me-2"></i>
+                                Documentation API
+                            </a>
+                            
+                            <a href="http://localhost:8501" target="_blank" class="btn btn-outline-primary">
+                                <i class="fas fa-tachometer-alt me-2"></i>
+                                Dashboard
+                            </a>
+                            
+                            <button class="btn btn-outline-success" onclick="testPrediction()">
+                                <i class="fas fa-bolt me-2"></i>
+                                Tester prédiction
+                            </button>
+                            
+                            <button class="btn btn-outline-warning" onclick="checkHealth()">
+                                <i class="fas fa-heartbeat me-2"></i>
+                                Vérifier santé
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="mb-3">
+                        <i class="fas fa-industry me-2"></i>
+                        Plateforme de Maintenance Prédictive
+                    </h5>
+                    <p class="text-light small mb-0">
+                        Solution IA complète pour la prédiction de pannes industrielles.
+                        Développée avec Python, FastAPI, Streamlit et Machine Learning.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-1">
+                        <i class="fas fa-code me-2"></i>
+                        Version 1.0.0
+                    </p>
+                    <p class="mb-0">
+                        <i class="fas fa-server me-2"></i>
+                        API: http://localhost:8000
+                    </p>
+                </div>
+            </div>
+            <hr class="bg-light my-3">
+            <div class="text-center">
+                <p class="mb-0 small">
+                    &copy; 2024 Plateforme de Maintenance Prédictive
+                    <span class="ms-2">
+                        <i class="fas fa-heart text-danger"></i>
+                        Développé avec passion
+                    </span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript personnalisé -->
+    <script>
+        // Mettre à jour les compteurs
+        function updateCounters() {
+            // Simuler des mises à jour (dans un vrai projet, appeler l'API)
+            const equipment = document.getElementById('active-equipment');
+            const predictions = document.getElementById('predictions-count');
+            const alerts = document.getElementById('active-alerts');
+            const models = document.getElementById('models-loaded');
+            
+            // Animer les compteurs
+            animateCounter(equipment, 24);
+            animateCounter(predictions, 1500);
+            animateCounter(alerts, 3);
+            animateCounter(models, 4);
+        }
+        
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 20);
+        }
+        
+        // Tester une prédiction
+        async function testPrediction() {
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        equipment_id: 'test_equipment',
+                        features: Array.from({length: 21}, () => Math.random()),
+                        model_type: 'xgboost'
+                    })
+                });
+                
+                const result = await response.json();
+                
+                alert(`Prédiction réussie!\nRUL: ${result.prediction.toFixed(1)} cycles\nStatut: ${result.status}\nConfiance: ${(result.confidence * 100).toFixed(1)}%`);
+                
+            } catch (error) {
+                alert('Erreur lors de la prédiction: ' + error.message);
+            }
+        }
+        
+        // Vérifier la santé de l'API
+        async function checkHealth() {
+            try {
+                const response = await fetch('/health');
+                const result = await response.json();
+                
+                alert(`API Status: ${result.status}\nModèles chargés: ${result.models_loaded}\nClients connectés: ${result.connected_clients}`);
+                
+            } catch (error) {
+                alert('API non disponible');
+            }
+        }
+        
+        // WebSocket pour les mises à jour temps réel
+        function connectWebSocket() {
+            const ws = new WebSocket(`ws://${window.location.host}/ws/realtime`);
+            
+            ws.onopen = () => {
+                console.log('Connecté au WebSocket temps réel');
+            };
+            
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                console.log('Données temps réel:', data);
+                
+                // Mettre à jour l'interface si nécessaire
+                // Par exemple, ajouter une notification
+                if (data.metadata.status === 'critical') {
+                    showNotification(`Alerte critique: ${data.equipment_id}`, data.metadata.status);
+                }
+            };
+            
+            ws.onerror = (error) => {
+                console.error('Erreur WebSocket:', error);
+            };
+        }
+        
+        function showNotification(title, message) {
+            // Créer une notification toast
+            const toast = document.createElement('div');
+            toast.className = 'position-fixed bottom-0 end-0 p-3';
+            toast.style.zIndex = '11';
+            
+            toast.innerHTML = `
+                <div class="toast show" role="alert">
+                    <div class="toast-header bg-warning text-dark">
+                        <strong class="me-auto">${title}</strong>
+                        <button type="button" class="btn-close" onclick="this.parentElement.parentElement.remove()"></button>
+                    </div>
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Supprimer automatiquement après 5 secondes
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.parentElement.removeChild(toast);
+                }
+            }, 5000);
+        }
+        
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCounters();
+            
+            // Se connecter au WebSocket si on est sur le serveur local
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                connectWebSocket();
+            }
+            
+            // Mettre à jour les compteurs toutes les 30 secondes
+            setInterval(updateCounters, 30000);
+        });
+    </script>
+</body>
+</html>
