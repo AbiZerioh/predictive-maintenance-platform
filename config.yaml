@@ -1,1 +1,43 @@
+project:
+  name: "Plateforme de Maintenance Prédictive"
+  version: "1.0.0"
 
+data:
+  dataset: "nasa_cmapss"
+  sequence_length: 50
+  train_split: 0.8
+
+models:
+  lstm:
+    units: [128, 64]
+    dropout: 0.2
+    learning_rate: 0.001
+    epochs: 50
+    batch_size: 32
+  
+  xgboost:
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+  
+  random_forest:
+    n_estimators: 100
+    max_depth: 10
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  debug: true
+
+dashboard:
+  port: 8501
+  theme: "dark"
+
+streaming:
+  enabled: true
+  simulation_rate: 5
+
+paths:
+  data: "./data"
+  models: "./models"
+  logs: "./logs"
